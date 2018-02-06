@@ -1,0 +1,19 @@
+---
+wp_path: "/usr/local/bin/wp" 
+plugin_name: "w3-total-cache"
+set_plugin_options:
+  pgcache:
+    enabled:
+      type: "boolean"
+      value: "true"
+    engine:
+      type: "string"
+      value: "file_generic"
+  objectcache:
+    enabled:
+      type: "boolean"
+      value: "true"
+    engine:
+      type: "string"
+      value: "file"
+...
