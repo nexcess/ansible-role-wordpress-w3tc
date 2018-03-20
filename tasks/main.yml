@@ -1,0 +1,23 @@
+---
+- name: Install w3-total-cache plugin
+  command: sudo -u {{ website_unix_user }} {{ wp_path }} --path={{ website_doc_root }} plugin install {{ plugin_name }}
+  register: w3tc_install
+  failed_when: w3tc_install.rc != 0
+
+- name: Activate w3-total-cache-plugin
+  command: sudo -u {{ website_unix_user }} {{ wp_path }} --path={{ website_doc_root }} plugin activate {{ plugin_name }}
+  register: w3tc_activate
+  failed_when: w3tc_activate.rc != 0
+
+- name: Enable w3-total-cache cache options
+  command: sudo -u {{ website_unix_user }} {{ wp_path }} --path={{ website_doc_root }} {{ plugin_name }} option set {{ item.key }}.enabled {{ item.key.enabled.value }} --type={{ item.key.enabled.type }}
+  register: enable_cache_option
+  with_dict: set_plugin_options
+  failed_when: set_plugin_option.rc != 0
+
+- name: Set w3-total-cache cache engines
+  command: sudo -u {{ website_unix_user }} {{ wp_path }} --path={{ website_doc_root }} {{ plugin_name }} option set {{ item.key }}.engine {{ item.key.engine.value }} --type={{ item.key.engine.type }}
+  register: set_cache_option_engine
+  with_dict: set_plugin_options
+  failed_when: set_cache_option_engine.rc != 0
+...

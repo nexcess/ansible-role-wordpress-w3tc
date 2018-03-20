@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: "Eugene Simpkins II"
+  description: "Wordpress W3TC Role"
+  company: "Nexcess.net LLC"
+  license: "MIT"
+  min_ansible_version: "2.0"
+  platforms:
+    - name: "EL"
+      versions:
+        - "7"
+dependencies:
+  - name: "nexcess.wp-cli"
+    src: "git+git@github.com:nexcess/ansible-role-wp-cli.git"
+...
